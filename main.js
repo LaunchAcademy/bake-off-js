@@ -8,59 +8,70 @@ let bakers = [
   "Martha",
   "Nancy",
   "Norman",
-  "Richard"
+  "Richard",
 ]
 
 let signatureBakes = [
   [
     "Cardamom, Pistachio and Coffee Swiss Roll",
     "Fenugreek and Carom Crackers",
-    "Onion and Pine Nut Rolls	"
+    "Onion and Pine Nut Rolls	",
   ],
   [
     "Mum's Sunday Tea Lemon Curd Swiss Roll",
     "Parmesan Triangles",
-    "Rustic Picnic Rolls"
+    "Rustic Picnic Rolls",
   ],
   [
     "Raspberry and Lemon Swiss Roll",
     "Za'atar and Fig Biscuits",
-    "Cranberry and Walnut Rye Bread Rolls"
+    "Cranberry and Walnut Rye Bread Rolls",
   ],
   [
     "Apricot and Basil Swiss Roll",
     "Parmesan and Apple Biscuits",
-    "Orange and Cardamom Rye Bread Knot"
+    "Orange and Cardamom Rye Bread Knot",
   ],
   [
     "Red Velvet and White Chocolate Swiss Roll",
     "Black Olive and Rosemary Biscuits",
-    "Opposites Attract Rolls"
+    "Opposites Attract Rolls",
   ],
   [
     "Spanish Swiss Roll",
     "Caramelised Onion and Goat's Cheese Sandwich Biscuits",
-    "Date and Walnut Rye Rolls"
+    "Date and Walnut Rye Rolls",
   ],
   [
     "Tiramisu Swiss Roll",
     "Fennel and Rye Thins",
-    "Cider and Walnut Crusty Rolls"
+    "Cider and Walnut Crusty Rolls",
   ],
   ["Coffee and Hazelnut Swiss Roll", "Farthing Biscuits", "Rye Bread Rolls"],
   [
     "Pistachio and Strawberry Swiss Roll",
     "Rosemary Seeded Crackers",
-    "Rye and Cranberry Rolls"
-  ]
+    "Rye and Cranberry Rolls",
+  ],
 ]
 
 // 1. Is there a contestant named Martha? What about a contestant named Tony? Create a function called `doTheyExist` that returns a message that tells if they were in the contest or not.
-
+const doTheyExist = (contestant) => {
+  if (bakers.includes(contestant)) {
+    return `Yes, there is a contestant named ${contestant} `
+  } else {
+    return `No, there is not a contestant named ${contestant} `
+  }
+}
 console.log(doTheyExist("Martha"))
 console.log(doTheyExist("Tony"))
 
 // 2. We have a new baker who wants to join our competition! Tony wants to jump in. Add Tony's name to the bakers array and add an array of his 3 bakes to the signatureBakes array.
+const addABaker = (name, bakesArray) => {
+  bakers.push(name)
+  signatureBakes.push(bakesArray)
+  return bakers.indexOf(name)
+}
 
 //Create a function named `addABaker` which should take 2 arguments, a name and an array with 3 bakes. Once added to the original arrays, return Tony's new index. Remember not to hardcode Tony's name.
 
@@ -73,6 +84,17 @@ console.log(
 
 // Create a function named `removeBaker` that takes in a name as an argument and if that person exists, remove that person from the bakers array and the signatureBakes array and return true. If the person doesn't exist, return false.
 
+const removeBaker = (name) => {
+  if (bakers.includes(name)) {
+    let i = bakers.indexOf(name)
+    bakers.splice(i, 1)
+    signatureBakes.splice(i, 1)
+    return true
+  } else {
+    return false
+  }
+}
+
 console.log("Norman is removed: ", removeBaker("Norman"))
 console.log("George is removed: ", removeBaker("George"))
 //After All Changes
@@ -82,6 +104,16 @@ console.log("Signature Bakes", signatureBakes)
 // 4. The winner of week 2 baked Rosemary Seeded Crackers. Who was the winner?
 
 // Create a function called `theBaker` that takes the name of a bake as an argument and returns the name of the person who baked it.
+
+const theBaker = (bake) => {
+  let baker
+  signatureBakes.forEach((bakeList, index) => {
+    if (bakeList.includes(bake)) {
+      baker = bakers[index]
+    }
+  })
+  return baker
+}
 
 console.log(theBaker("Rosemary Seeded Crackers"))
 console.log(theBaker("Opposites Attract Rolls"))
@@ -96,6 +128,12 @@ console.log(theBaker("Opposites Attract Rolls"))
   In week 3 Richard baked Rye and Cranberry Rolls
 
 */
+
+const nameThatBake = (weekNum, baker) => {
+  let bakerIndex = bakers.indexOf(baker)
+  let bakeList = signatureBakes[bakerIndex]
+  return bakeList[weekNum - 1]
+}
 
 console.log(`In week 1, Nancy baked ${nameThatBake(1, "Nancy")}`)
 console.log(`In week 3, Richard baked ${nameThatBake(3, "Richard")}`)
@@ -114,7 +152,13 @@ console.log(`In week 3, Richard baked ${nameThatBake(3, "Richard")}`)
   ...
 
 */
-
+const printWeek = (weekNum) => {
+  let newString = `Week ${weekNum} dishes: \n`
+  signatureBakes.forEach((bakeList, index) => {
+    newString += `${bakers[index]} baked a ${bakeList[weekNum - 1]} \n`
+  })
+  return newString
+}
 console.log(printWeek(1))
 console.log(printWeek(3))
 
