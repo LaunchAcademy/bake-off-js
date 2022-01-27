@@ -52,9 +52,22 @@ The index of the bake corresponds to the week it was baked. So for example for w
 
 **To answer the questions below you will need to create functions that take arguments.** You should not hard code anything. Make sure your formatting matches the examples.
 
-1. The winner of week 2 baked Rosemary Seeded Crackers. Who was the winner? Create a function called `theBaker` that takes the name of a bake as an argument and returns the name of the person who baked it.
+1. Is there a contestant named Martha? What about a contestant named Tony? Create a function called `doTheyExist` that returns a message that tells if they were in the contest or not.
 
-2. What did Nancy bake in week 1? What about Richard in week 3? Create a function called `nameThatBake` that takes 2 arguments, the first argument being the number of the week of the bake, and the second argument being the name of the baker. It should return the item baked.
+Sample Outputs:
+
+```
+Yes Martha is a contestant
+No Tony is not a contestant
+```
+
+2. We have a new baker who wants to join our competition! Tony wants to jump in. Add Tony's name to the bakers array and add an array of his 3 bakes to the signatureBakes array. Create a function named `addABaker` which should take 2 arguments, a name and an array with 3 bakes. Once added to the original arrays, return Tony's new index. Remember not to hardcode Tony's name.
+
+3. Norman doesn't agree that Tony should be allowed to enter late and now wants to leave the competition. Create a function named `removeBaker` that takes in a name as an argument and if that person exists, remove that person from the bakers array and the signatureBakes array and return true. If the person doesn't exist, return false.
+
+4. The winner of week 2 baked Rosemary Seeded Crackers. Who was the winner? Create a function called `theBaker` that takes the name of a bake as an argument and returns the name of the person who baked it.
+
+5. What did Nancy bake in week 1? What about Richard in week 3? Create a function called `nameThatBake` that takes 2 arguments, the first argument being the number of the week of the bake, and the second argument being the name of the baker. It should return the item baked.
 
 Sample Output:
 
@@ -63,7 +76,7 @@ In week 1 Nancy baked Tiramisu Swiss Roll
 In week 3 Richard baked Rye and Cranberry Rolls
 ```
 
-3. What did everyone bake in week 1? What about week 3? Create a function called `printWeek` that takes 1 argument, the week of the contest, and returns a formatted list of all dishes for that week.
+6. What did everyone bake in week 1? What about week 3? Create a function called `printWeek` that takes 1 argument, the week of the contest, and returns a formatted list of all dishes for that week.
 
 Sample Output:
 
@@ -76,7 +89,7 @@ Iain baked a Raspberry and Lemon Swiss Roll
 ...
 ```
 
-4. What about if we wanted a weekly summary of what Nancy cooked? What about Iain? Create a function named `printBaker` that takes in the name of the baker and returns a formatted list of all the Baker's dishes.
+7. What about if we wanted a weekly summary of what Nancy cooked? What about Iain? Create a function named `printBaker` that takes in the name of the baker and returns a formatted list of all the Baker's dishes.
 
 Sample Output:
 
@@ -88,7 +101,7 @@ Fennel and Rye Thins
 Cider and Walnut Crusty Rolls
 ```
 
-5. Executives of the show are lazy and just want one report recapping what happened in the competition. Create a function named `printSummary` with no arguments. It should return a formatted message that includes a summary for each week.
+8. Executives of the show are lazy and just want one report recapping what happened in the competition. Create a function named `printSummary` with no arguments. It should return a formatted message that includes a summary for each week.
 
 Tip:
 
@@ -117,7 +130,7 @@ Iain baked a Raspberry and Lemon Swiss Roll
 
 ```
 
-6. How many bakes include the word Lemon in the title? What are their names and who baked them? What about bakes with Rosemary in the title? Remember it's possible it could be lower cased in the title. Create a function called `bakesWith` that takes 1 argument, the word you want to check for in the titles of the bakes. It should return a summary of all related bakes.
+9. How many bakes include the word Lemon in the title? What are their names and who baked them? What about bakes with Rosemary in the title? Remember it's possible it could be lower cased in the title. Create a function called `bakesWith` that takes 1 argument, the word you want to check for in the titles of the bakes. It should return a summary of all related bakes.
 
 Sample Output:
 
@@ -128,20 +141,11 @@ Diana baked the Mum's Sunday Tea Lemon Curd Swiss Roll
 Iain baked the Raspberry and Lemon Swiss Roll
 ```
 
-7. That last function did two things, it counted the number of bakes that include the ingredient, and it made a list of what they were. Let's refactor this by creating a helper function to handle finding the bakes. Create a function called `findBakes` that takes in one argument, the ingredient to search for. It should return an array with only the related bakes that include the ingredient in the title.
+10. That last function did two things, it counted the number of bakes that include the ingredient, and it made a list of what they were. Let's refactor this by creating a helper function to handle finding the bakes. Create a function called `findBakes` that takes in one argument, the ingredient to search for. It should return an array with only the related bakes that include the ingredient in the title.
 
-8. Now it's time to refactor our original `bakesWith` function. Create a new function named `bakesWith2` that has all the same functionality as the original, but uses the `findBakes` function to handle all finding the related bakes. It is okay to copy, rename, and refactor the existing `bakesWith` function.
+11. Now it's time to refactor our original `bakesWith` function. Create a new function named `bakesWith2` that has all the same functionality as the original, but uses the `findBakes` function to handle all finding the related bakes. It is okay to copy, rename, and refactor the existing `bakesWith` function.
 
-9. Is there a contestant named Martha? What about a contestant named Tony? Create a function called `doTheyExist` that returns a message that tells if they were in the contest or not.
-
-Sample Outputs:
-
-```
-Yes Bobby was a contestant
-No Bobby was not a contestant
-```
-
-10. If Martha and Tony do exist, what did they bake in week 3? For this question you'll want to update your `nameThatBake` function. Create a function named `nameThatBake2` that takes in the week and name as arguments. Output the bake for that baker if they exist, otherwise return a message saying they were not in the competition.
+12. If Martha and George do exist, what did they bake in week 3? For this question you'll want to update your `nameThatBake` function. Create a function named `nameThatBake2` that takes in the week and name as arguments. Output the bake for that baker if they exist, otherwise return a message saying they were not in the competition.
 
 Tip:
 
@@ -153,9 +157,5 @@ Sample Output:
 
 ```
 In week 3 Martha baked Date and Walnut Rye Rolls.
-Tony was not in the competition and baked nothing.
+George was not in the competition and baked nothing.
 ```
-
-11. This is so exciting that Tony wants to jump into the competition. Add Tony's name to the bakers array and add an array of his 3 bakes to the signatureBakes array. Create a function named `addABaker` which should take 2 arguments, a name and an array with 3 bakes. Once added to the original arrays, return Tony's new index. Remember not to hardcode Tony's name.
-
-12. Norman doesn't agree that Tony should be allowed to enter late and now wants to leave the competition. Create a function named `removeBaker` that takes in a name as an argument and if that person exists, remove that person from the bakers array and the signatureBakes array and return true. If the person doesn't exist, return false.
