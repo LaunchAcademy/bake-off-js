@@ -57,12 +57,38 @@ let signatureBakes = [
 
 // 1. Is there a contestant named Martha? What about a contestant named Tony? Create a function called `doTheyExist` that returns a message that tells if they were in the contest or not.
 
+let doTheyExist = (contestant) => {
+  // let message
+  let message = ''
+  // if (bakers.includes(contestant) === true){
+    if (bakers.includes(contestant)){
+    // message = 'Yes ' + contestant + ' is a contestant'
+    message = `Yes ${contestant} is a contestant`
+  } else {
+    message = 'No ' + contestant + ' is not a contestant'
+  }
+  return message
+
+  // if (bakers.includes(contestant)){
+  //   return 'Yes ' + contestant + ' is a contestant'
+  // } else {
+  //   return 'No ' + contestant + ' is not a contestant'
+  // }
+}
+
 console.log(doTheyExist("Martha"))
 console.log(doTheyExist("Tony"))
 
 // 2. We have a new baker who wants to join our competition! Tony wants to jump in. Add Tony's name to the bakers array and add an array of his 3 bakes to the signatureBakes array.
 
 //Create a function named `addABaker` which should take 2 arguments, a name and an array with 3 bakes. Once added to the original arrays, return Tony's new index. Remember not to hardcode Tony's name.
+let addABaker = (name, bakesArray) => {
+  bakers.push(name)
+  signatureBakes.push(bakesArray)
+
+  return bakers.indexOf(name)
+
+}
 
 console.log(
   "Tony's index: ",
@@ -72,6 +98,25 @@ console.log(
 // 3. Norman doesn't agree that Tony should be allowed to enter late and now wants to leave the competition.
 
 // Create a function named `removeBaker` that takes in a name as an argument and if that person exists, remove that person from the bakers array and the signatureBakes array and return true. If the person doesn't exist, return false.
+const removeBaker = bakerName => {
+  if(!bakers.includes(bakerName)) {
+    return false
+  } else {
+    index = bakers.indexOf(bakerName)
+    bakers.splice(index, 1)
+    signatureBakes.splice(index, 1)
+    return true
+  }
+
+  // if(doTheyExist(bakerName)) {
+  //   index = bakers.indexOf(bakerName)
+  //   bakers.splice(index, 1)
+  //   signatureBakes.splice(index, 1)
+  //   return true
+  // } else {
+  //   return false
+  // }
+}
 
 console.log("Norman is removed: ", removeBaker("Norman"))
 console.log("George is removed: ", removeBaker("George"))
@@ -83,6 +128,31 @@ console.log("Signature Bakes", signatureBakes)
 
 // Create a function called `theBaker` that takes the name of a bake as an argument and returns the name of the person who baked it.
 
+const theBaker = (nameOfBake) => {
+  // look inside signatureBakes to find the `nameOfBake`
+  // go through signatureBakes one by one
+  let selectedIndex
+  signatureBakes.forEach((bakeArray, currentIndex) => {
+    // if the subarray includes the specified bake
+    if(bakeArray.includes(nameOfBake)) {
+      // then we want to store the index of that bake array
+      selectedIndex = currentIndex
+    }
+  })
+
+  signatureBakes.forEach(bakeArray => {
+    // if the subarray includes the specified bake
+    if(bakeArray.includes(nameOfBake)) {
+      // then we want to store the index of that bake array
+      selectedIndex = signatureBakes.indexOf(bakeArray)
+    }
+  })
+
+  // find and return the baker with that index (inside the `bakers` array)
+
+  return bakers[selectedIndex]
+}
+
 console.log(theBaker("Rosemary Seeded Crackers"))
 console.log(theBaker("Opposites Attract Rolls"))
 
@@ -90,6 +160,12 @@ console.log(theBaker("Opposites Attract Rolls"))
 
 // Create a function called `nameThatBake` that takes 2 arguments, the first argument being the number of the week of the bake, and the second argument being the name of the baker. It should return the item baked.
 
+const nameThatBake = (numOfBakeWeek, bakerName) => {
+  let topLevelIndex = bakers.indexOf(bakerName)
+  // const relatedBakes = signatureBakes[topLevelIndex]
+  // const weekBake = relatedBaked[numOfBakeWeek - 1]
+  return signatureBakes[topLevelIndex][numOfBakeWeek-1]
+}
 /* Sample Output
 
   In week 1 Nancy baked Tiramisu Swiss Roll
@@ -115,12 +191,39 @@ console.log(`In week 3, Richard baked ${nameThatBake(3, "Richard")}`)
 
 */
 
+const printWeek = (week) => {
+  // console.log(`Week ${week} dishes:`)
+  const weekIndex = week -1
+  let list = `Week ${week} dishes:\n\n`
+  //For each baker, get the name and the dish
+  bakers.forEach((baker) => {
+    let indexBaker = bakers.indexOf(baker)
+    let personalDishes = signatureBakes[indexBaker]
+    list += `${baker} baked a ${personalDishes[weekIndex]}\n`
+  })
+
+  return list
+}
+
 console.log(printWeek(1))
 console.log(printWeek(3))
 
 // 7. What about if we want a weekly summary of what Nancy cooked? What about Iain?
 
 // Create a function named `printBaker` that takes in the name of the baker and returns a formatted list of all the Baker's dishes.
+
+const printBaker = (bakerName) => {
+  let list = `${bakerName}'s Summary:\n\n`
+
+  let bakerIndex = bakers.indexOf(bakerName)
+  let personalDishes = signatureBakes[bakerIndex]
+
+  personalDishes.forEach(dish => {
+    list += `${dish}\n`
+  })
+
+  return list
+}
 
 /* Sample Output:
 
@@ -138,6 +241,30 @@ console.log(printBaker("Iain"))
 // 8. Now we want a summary of everything that happened during the competition!
 
 // Create a function named `printSummary` with no arguments. It should return a formatted message that includes a summary for each week.
+
+const printSummary = () => {
+  let list = `Competition Summary:\n\n`
+
+  // for each week
+  // add `printWeek` output to the summary
+
+  // let i = 1
+  // while (i < 4){
+  //   list += `${printWeek(i)}\n\n`
+  //   i++
+  // }
+
+  // make the total number of Weeks dynamic
+  let numberOfWeeks = signatureBakes[0].length
+  let i = 1
+  // while (i < numberOfWeeks + 1){
+  while (i <= numberOfWeeks){
+    list += `${printWeek(i)}\n\n`
+    i++
+  }
+
+  return list
+}
 
 /* Sample Output:
 
